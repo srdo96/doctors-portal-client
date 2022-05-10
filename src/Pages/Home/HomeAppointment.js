@@ -4,9 +4,13 @@ import Button from "../Shared/Button";
 
 const HomeAppointment = () => {
   return (
-    <div class="hero min-h-16 bg-[url('../../assets/images/appointment.png')] mt-80">
+    <div class="hero min-h-16 bg-[url('../../assets/images/appointment.png')] mt-16 lg:mt-80">
       <div class="hero-content flex-col lg:flex-row">
-        <img src={doctor} class="mt-[-100px] mb-[-15px]" alt="doctor" />
+        <img
+          src={doctor}
+          class="mt-[-100px] mb-[-15px] hidden lg:block"
+          alt="doctor"
+        />
         <div>
           <h1 className="text-xl text-secondary font-bold">Appointment</h1>
           <div className="text-white">
