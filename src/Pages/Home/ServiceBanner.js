@@ -1,5 +1,6 @@
 import React from "react";
 import treatment from "../../assets/images/treatment.png";
+import Button from "../Shared/Button";
 const ServiceBanner = () => {
   return (
     <div class="hero min-h-screen mt-40 ">
@@ -21,9 +22,7 @@ const ServiceBanner = () => {
             here', making it look like readable English. Many desktop publishing
             packages and web page
           </p>
-          <button class="btn btn-secondary bg-gradient-to-r from-secondary to-primary text-white">
-            Get Started
-          </button>
+          <Button />
         </div>
       </div>
     </div>
