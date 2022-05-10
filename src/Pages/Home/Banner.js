@@ -3,7 +3,7 @@ import bannerPic from "../../assets/images/chair.png";
 const Banner = () => {
   return (
     <div>
-      <div className="hero min-h-screen ">
+      <div className="hero min-h-screen px-10 bg-[url('../../assets/images/bg.png')]">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <img
             src={bannerPic}
@@ -20,7 +20,7 @@ const Banner = () => {
               excepturi exercitationem quasi. In deleniti eaque aut repudiandae
               et a id nisi.
             </p>
-            <button className="btn btn-secondary text-white">
+            <button className="btn btn-secondary uppercase  text-white bg-gradient-to-r from-secondary to-primary">
               Get Started
             </button>
           </div>
