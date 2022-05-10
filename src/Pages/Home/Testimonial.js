@@ -14,7 +14,7 @@ const Testimonial = () => {
           <h1 className="text-4xl font-normal">What Our Patients Says</h1>
         </div>
         {/* <div className=""> */}
-        <img src={quote} className="mt-[-18px] h-40" alt="" />
+        <img src={quote} className="mt-[-18px] h-40 w-24 lg:w-48" alt="" />
         {/* </div> */}
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-14 mt-24">
