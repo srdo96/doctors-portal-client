@@ -1,12 +1,11 @@
 import React from "react";
-import Button from "../Shared/Button";
 
-const AvailableServiceCard = ({ service }) => {
+const AvailableServiceCard = ({ service, setBook }) => {
   const { name, slots } = service;
   return (
-    <div class="card lg:max-w-lg  shadow-md">
-      <div class="card-body items-center text-center">
-        <h2 class="card-title text-secondary">{name}</h2>
+    <div className="card lg:max-w-lg  shadow-md">
+      <div className="card-body items-center text-center">
+        <h2 className="card-title text-secondary">{name}</h2>
         <p className="text-black">
           {slots.length > 0 ? (
             <span>{slots[0]}</span>
@@ -17,8 +16,15 @@ const AvailableServiceCard = ({ service }) => {
         <p>
           {slots.length} {slots.length > 1 ? "spaces" : "space"} available
         </p>
-        <div class="card-actions justify-end">
-          <Button text="Book Appointment" isDisabled={!slots.length} />
+        <div className="card-actions justify-end">
+          <label
+            disabled={slots.length === 0 && "disabled"}
+            onClick={() => setBook(service)}
+            for="booking-modal"
+            class="btn modal-button btn btn-secondary uppercase text-white bg-gradient-to-r from-secondary to-primary"
+          >
+            Booking Appointment
+          </label>
         </div>
       </div>
     </div>
