@@ -1,6 +1,6 @@
 import React from "react";
 
-const AvailableServiceCard = ({ service, setBook }) => {
+const AvailableServiceCard = ({ service, setBooking }) => {
   const { name, slots } = service;
   return (
     <div className="card lg:max-w-lg  shadow-md">
@@ -19,9 +19,9 @@ const AvailableServiceCard = ({ service, setBook }) => {
         <div className="card-actions justify-end">
           <label
             disabled={slots.length === 0 && "disabled"}
-            onClick={() => setBook(service)}
+            onClick={() => setBooking(service)}
             for="booking-modal"
-            class="btn modal-button btn btn-secondary uppercase text-white bg-gradient-to-r from-secondary to-primary"
+            class=" modal-button btn btn-secondary uppercase text-white bg-gradient-to-r from-secondary to-primary"
           >
             Booking Appointment
           </label>

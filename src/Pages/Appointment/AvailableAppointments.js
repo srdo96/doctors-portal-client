@@ -5,8 +5,8 @@ import BookingModal from "./BookingModal";
 
 const AvailableAppointments = ({ selectedDate }) => {
   const [services, setServices] = useState([]);
-  const [book, setBook] = useState(null);
-  console.log(book);
+  const [booking, setBooking] = useState(null);
+  console.log(booking);
   useEffect(() => {
     fetch("services.json")
       .then((res) => res.json())
@@ -22,11 +22,17 @@ const AvailableAppointments = ({ selectedDate }) => {
           <AvailableServiceCard
             key={service._id}
             service={service}
-            setBook={setBook}
+            setBooking={setBooking}
           />
         ))}
       </dir>
-      {book && <BookingModal book={book} selectedDate={selectedDate} />}
+      {booking && (
+        <BookingModal
+          booking={booking}
+          setBooking={setBooking}
+          selectedDate={selectedDate}
+        />
+      )}
     </div>
   );
 };
