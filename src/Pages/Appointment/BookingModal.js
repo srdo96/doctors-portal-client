@@ -8,6 +8,7 @@ const bookingModal = ({ booking, setBooking, selectedDate }) => {
     e.preventDefault();
     const slot = e.target.slot.value;
     console.log(slot);
+    // for close modal
     setBooking(null);
   };
   return (

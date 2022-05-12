@@ -6,12 +6,13 @@ import BookingModal from "./BookingModal";
 const AvailableAppointments = ({ selectedDate }) => {
   const [services, setServices] = useState([]);
   const [booking, setBooking] = useState(null);
-  console.log(booking);
+
   useEffect(() => {
-    fetch("services.json")
+    fetch("http://localhost:5000/services")
       .then((res) => res.json())
       .then((data) => setServices(data));
   }, []);
+
   return (
     <div className="mt-4">
       <h3 className="text-2xl text-secondary text-center mb-24">
