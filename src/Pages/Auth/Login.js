@@ -1,26 +1,57 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useAuthState, useSignInWithGoogle } from "react-firebase-hooks/auth";
+import {
+  useAuthState,
+  useSignInWithEmailAndPassword,
+  useSignInWithGoogle,
+} from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import { useForm } from "react-hook-form";
 const Login = () => {
-  const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
+  const [signInWithGoogle, googleUser, googleLoading, googleError] =
+    useSignInWithGoogle(auth);
+  const [signInWithEmailAndPassword, emailUser, emailLoading, emailError] =
+    useSignInWithEmailAndPassword(auth);
+
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+
+  let signInError;
+
+  const onSubmit = (data) => {
+    signInWithEmailAndPassword(data.email, data.password);
+    console.log(data);
+  };
+
+  if (googleError || emailError) {
+    signInError = (
+      <p className="text-red-600">
+        {googleError?.message || emailError?.message}
+      </p>
+    );
+  }
+
+  if (googleLoading || emailLoading) {
+    return (
+      <div className="h-screen flex justify-center items-center">
+        <button className="btn loading "></button>
+      </div>
+    );
+  }
 
   return (
     <div className="flex h-screen justify-center items-center">
       <div className="card w-96 bg-base-100 shadow-xl">
         <div className="mx-7">
           <h2 className="text-lg text-center mb-9 mt-6">Login</h2>
+
           <form onSubmit={handleSubmit(onSubmit)}>
             {/* Email */}
-            <label class="label">
-              <span class="label-text">Email</span>
+            <label className="label">
+              <span className="label-text">Email</span>
             </label>
             <input
               type="text"
@@ -37,22 +68,22 @@ const Login = () => {
                 },
               })}
             />
-            <label class="label">
+            <label className="label">
               {errors.email?.type === "required" && (
-                <span class="label-text-alt text-red-600">
+                <span className="label-text-alt text-red-600">
                   {errors.email.message}
                 </span>
               )}
               {errors.email?.type === "pattern" && (
-                <span class="label-text-alt text-red-600">
+                <span className="label-text-alt text-red-600">
                   {errors.email.message}
                 </span>
               )}
             </label>
 
             {/* Password */}
-            <label class="label">
-              <span class="label-text mt-3">Password</span>
+            <label className="label">
+              <span className="label-text mt-3">Password</span>
             </label>
             <input
               type="text"
@@ -69,14 +100,14 @@ const Login = () => {
                 },
               })}
             />
-            <label class="label">
+            <label className="label">
               {errors.password?.type === "required" && (
-                <span class="label-text-alt text-red-600">
+                <span className="label-text-alt text-red-600">
                   {errors.password.message}
                 </span>
               )}
               {errors.password?.type === "minLength" && (
-                <span class="label-text-alt text-red-600">
+                <span className="label-text-alt text-red-600">
                   {errors.password.message}
                 </span>
               )}
@@ -86,31 +117,12 @@ const Login = () => {
               Forget Password?
             </Link>
             {/* <input type="submit" /> */}
+            {signInError}
             <button type="submit" className="btn btn-block mt-5">
               Login
             </button>
           </form>
 
-          {/* <form>
-            <p>Email</p>
-            <input
-              type="text"
-              placeholder="Email "
-              className="input input-bordered  w-full max-w-lg mb-3"
-            />
-            <p>Password</p>
-            <input
-              type="password"
-              placeholder="Password"
-              className="input input-bordered  w-full max-w-lg"
-            />
-            <Link to="/reset" className="text-xs  btn-link">
-              Forget Password?
-            </Link>
-            <button type="submit" className="btn btn-block mt-5">
-              Login
-            </button>
-          </form> */}
           <div className="divider">OR</div>
           <button
             onClick={() => signInWithGoogle()}
