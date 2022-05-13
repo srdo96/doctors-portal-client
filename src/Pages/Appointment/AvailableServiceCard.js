@@ -20,8 +20,8 @@ const AvailableServiceCard = ({ service, setBooking }) => {
           <label
             disabled={slots.length === 0 && "disabled"}
             onClick={() => setBooking(service)}
-            for="booking-modal"
-            class=" modal-button btn btn-secondary uppercase text-white bg-gradient-to-r from-secondary to-primary"
+            htmlFor="booking-modal"
+            className=" modal-button btn btn-secondary uppercase text-white bg-gradient-to-r from-secondary to-primary"
           >
             Booking Appointment
           </label>

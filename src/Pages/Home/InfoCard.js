@@ -2,7 +2,6 @@ import React from "react";
 
 const InfoCard = ({ info, index }) => {
   const { img, title, desc } = info;
-  console.log(img);
   return (
     <div
       className={`card lg:card-side shadow-xl px-6 ${

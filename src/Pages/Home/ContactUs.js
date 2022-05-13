@@ -14,19 +14,19 @@ const ContactUs = () => {
           <input
             type="email"
             placeholder="Email Address"
-            class="input input-bordered w-full max-w-xs"
+            className="input input-bordered w-full max-w-xs"
           />
         </div>
         <div>
           <input
             type="Subject"
             placeholder="Subject"
-            class="input input-bordered w-full max-w-xs my-5"
+            className="input input-bordered w-full max-w-xs my-5"
           />
         </div>
         <div>
           <textarea
-            class="textarea textarea-bordered w-full max-w-xs mb-9"
+            className="textarea textarea-bordered w-full max-w-xs mb-9"
             placeholder="Your Message"
           ></textarea>
         </div>

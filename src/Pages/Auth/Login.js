@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   useAuthState,
@@ -19,19 +19,23 @@ const Login = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
+
   let location = useLocation();
   let navigate = useNavigate();
-
   let from = location.state?.from?.pathname || "/";
+
+  useEffect(() => {
+    if (googleUser || emailUser) {
+      navigate(from, { replace: true });
+    }
+  }, [googleUser, emailUser, from, navigate]);
+
   let signInError;
 
   const onSubmit = (data) => {
     signInWithEmailAndPassword(data.email, data.password);
-    console.log(data);
   };
-  if (googleUser || emailUser) {
-    navigate(from, { replace: true });
-  }
+
   if (googleError || emailError) {
     signInError = (
       <p className="text-red-600">
@@ -92,7 +96,7 @@ const Login = () => {
               <span className="label-text mt-3">Password</span>
             </label>
             <input
-              type="text"
+              type="password"
               placeholder="Password"
               className="input input-bordered w-full max-w-lg"
               {...register("password", {

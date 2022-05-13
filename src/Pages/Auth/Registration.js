@@ -1,6 +1,6 @@
 import { async } from "@firebase/util";
 import { updatePassword } from "firebase/auth";
-import React from "react";
+import React, { useEffect } from "react";
 import {
   useCreateUserWithEmailAndPassword,
   useSignInWithEmailAndPassword,
@@ -32,7 +32,6 @@ const Registration = () => {
   const onSubmit = async (data) => {
     await createUserWithEmailAndPassword(data.email, data.password);
     await updateProfile({ displayName: data.name });
-    console.log(data);
     navigate("/appointment");
   };
 
@@ -43,10 +42,11 @@ const Registration = () => {
       </p>
     );
   }
-
-  if (emailUser || googleUser) {
-    console.log(emailUser || googleUser);
-  }
+  useEffect(() => {
+    if (emailUser || googleUser) {
+      navigate("/");
+    }
+  }, [emailUser, googleUser, navigate]);
 
   if (googleLoading || emailLoading || updating) {
     return (
@@ -122,7 +122,7 @@ const Registration = () => {
               <span className="label-text mt-3">Password</span>
             </label>
             <input
-              type="text"
+              type="password"
               placeholder="Password"
               className="input input-bordered w-full max-w-lg"
               {...register("password", {
