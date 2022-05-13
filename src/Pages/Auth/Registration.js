@@ -1,11 +1,14 @@
+import { async } from "@firebase/util";
+import { updatePassword } from "firebase/auth";
 import React from "react";
 import {
   useCreateUserWithEmailAndPassword,
   useSignInWithEmailAndPassword,
   useSignInWithGoogle,
+  useUpdateProfile,
 } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 
 const Registration = () => {
@@ -15,6 +18,8 @@ const Registration = () => {
   const [createUserWithEmailAndPassword, emailUser, emailLoading, emailError] =
     useCreateUserWithEmailAndPassword(auth);
 
+  const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+
   const {
     register,
     formState: { errors },
@@ -22,13 +27,16 @@ const Registration = () => {
   } = useForm();
 
   let signInError;
+  const navigate = useNavigate();
 
-  const onSubmit = (data) => {
-    createUserWithEmailAndPassword(data.email, data.password);
+  const onSubmit = async (data) => {
+    await createUserWithEmailAndPassword(data.email, data.password);
+    await updateProfile({ displayName: data.name });
     console.log(data);
+    navigate("/appointment");
   };
 
-  if (googleError || emailError) {
+  if (googleError || emailError || updateError) {
     signInError = (
       <p className="text-red-600">
         {googleError?.message || emailError?.message}
@@ -39,7 +47,8 @@ const Registration = () => {
   if (emailUser || googleUser) {
     console.log(emailUser || googleUser);
   }
-  if (googleLoading || emailLoading) {
+
+  if (googleLoading || emailLoading || updating) {
     return (
       <div className="h-screen flex justify-center items-center">
         <button className="btn loading "></button>
