@@ -4,8 +4,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import toast from "react-hot-toast";
 import auth from "../../firebase.init";
 
-const BookingModal = ({ booking, setBooking, selectedDate }) => {
-  console.log(booking);
+const BookingModal = ({ booking, setBooking, selectedDate, refetch }) => {
   const { _id, name, slots } = booking;
   const [user, loading, error] = useAuthState(auth);
   const formattedData = format(selectedDate, "PP");
@@ -37,9 +36,10 @@ const BookingModal = ({ booking, setBooking, selectedDate }) => {
           toast.success(`Appointment is set, ${formattedData} at ${slot}`);
         } else {
           toast.error(
-            `Already have an appointment on, ${data.booking?.selectedDate} at ${data.booking?.slot}`
+            `Already have an appointment on, ${data.booking?.date} at ${data.booking?.slot}`
           );
         }
+        refetch();
         setBooking(null);
       });
   };

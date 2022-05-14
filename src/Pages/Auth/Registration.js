@@ -10,6 +10,7 @@ import {
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
+import Loading from "../Shared/Loading";
 
 const Registration = () => {
   const [signInWithGoogle, googleUser, googleLoading, googleError] =
@@ -49,11 +50,7 @@ const Registration = () => {
   }, [emailUser, googleUser, navigate]);
 
   if (googleLoading || emailLoading || updating) {
-    return (
-      <div className="h-screen flex justify-center items-center">
-        <button className="btn loading "></button>
-      </div>
-    );
+    return <Loading />;
   }
   return (
     <div className="flex h-screen justify-center items-center">
