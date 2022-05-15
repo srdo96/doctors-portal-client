@@ -12,6 +12,7 @@ import Navbar from "./Pages/Shared/Navbar";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import MyAppointments from "./Pages/Dashboard/MyAppointments";
 import MyReview from "./Pages/Dashboard/MyReview";
+import Users from "./Pages/Dashboard/Users";
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
         >
           <Route index element={<MyAppointments />} />
           <Route path="review" element={<MyReview />} />
+          <Route path="users" element={<Users />} />
         </Route>
       </Routes>
       <Footer />
