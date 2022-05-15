@@ -13,6 +13,7 @@ import Dashboard from "./Pages/Dashboard/Dashboard";
 import MyAppointments from "./Pages/Dashboard/MyAppointments";
 import MyReview from "./Pages/Dashboard/MyReview";
 import Users from "./Pages/Dashboard/Users";
+import ReqAdmin from "./Pages/Auth/ReqAdmin";
 
 function App() {
   return (
@@ -43,7 +44,14 @@ function App() {
         >
           <Route index element={<MyAppointments />} />
           <Route path="review" element={<MyReview />} />
-          <Route path="users" element={<Users />} />
+          <Route
+            path="users"
+            element={
+              <ReqAdmin>
+                <Users />
+              </ReqAdmin>
+            }
+          />
         </Route>
       </Routes>
       <Footer />
