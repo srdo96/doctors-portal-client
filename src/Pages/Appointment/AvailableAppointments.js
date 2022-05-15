@@ -21,7 +21,6 @@ const AvailableAppointments = ({ selectedDate }) => {
       res.json()
     )
   );
-
   if (isLoading) {
     return <Loading />;
   }

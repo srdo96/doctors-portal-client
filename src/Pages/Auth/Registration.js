@@ -10,6 +10,7 @@ import {
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
+import useToken from "../../hooks/useToken";
 import Loading from "../Shared/Loading";
 
 const Registration = () => {
@@ -20,7 +21,7 @@ const Registration = () => {
     useCreateUserWithEmailAndPassword(auth);
 
   const [updateProfile, updating, updateError] = useUpdateProfile(auth);
-
+  const [token] = useToken(emailUser || googleUser);
   const {
     register,
     formState: { errors },
@@ -33,21 +34,21 @@ const Registration = () => {
   const onSubmit = async (data) => {
     await createUserWithEmailAndPassword(data.email, data.password);
     await updateProfile({ displayName: data.name });
-    navigate("/appointment");
   };
 
   if (googleError || emailError || updateError) {
     signInError = (
       <p className="text-red-600">
-        {googleError?.message || emailError?.message}
+        {googleError?.message || emailError?.message || updateError?.message}
       </p>
     );
   }
   useEffect(() => {
-    if (emailUser || googleUser) {
-      navigate("/");
+    if (token) {
+      navigate("/appointment");
+      // navigate("/");
     }
-  }, [emailUser, googleUser, navigate]);
+  }, [token, navigate]);
 
   if (googleLoading || emailLoading || updating) {
     return <Loading />;
