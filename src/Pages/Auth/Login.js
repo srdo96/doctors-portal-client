@@ -7,12 +7,15 @@ import {
 } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import { useForm } from "react-hook-form";
+import useToken from "../../hooks/useToken";
 
 const Login = () => {
   const [signInWithGoogle, googleUser, googleLoading, googleError] =
     useSignInWithGoogle(auth);
   const [signInWithEmailAndPassword, emailUser, emailLoading, emailError] =
     useSignInWithEmailAndPassword(auth);
+
+  const [token] = useToken(emailUser || googleUser);
 
   const {
     register,
@@ -25,10 +28,10 @@ const Login = () => {
   let from = location.state?.from?.pathname || "/";
 
   useEffect(() => {
-    if (googleUser || emailUser) {
+    if (token) {
       navigate(from, { replace: true });
     }
-  }, [googleUser, emailUser, from, navigate]);
+  }, [token, from, navigate]);
 
   let signInError;
 
