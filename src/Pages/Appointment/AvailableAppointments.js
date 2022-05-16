@@ -17,15 +17,15 @@ const AvailableAppointments = ({ selectedDate }) => {
     data: services,
     refetch,
   } = useQuery(["available", formattedData], () =>
-    fetch(`http://localhost:5000/available?date=${formattedData}`).then((res) =>
-      res.json()
-    )
+    fetch(
+      `https://desolate-fjord-46813.herokuapp.com/available?date=${formattedData}`
+    ).then((res) => res.json())
   );
   if (isLoading) {
     return <Loading />;
   }
   // useEffect(() => {
-  //   fetch(`http://localhost:5000/available?date=${formattedData}`)
+  //   fetch(`https://desolate-fjord-46813.herokuapp.com/available?date=${formattedData}`)
   //     .then((res) => res.json())
   //     .then((data) => setServices(data));
   // }, [formattedData]);
