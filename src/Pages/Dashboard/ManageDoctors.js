@@ -18,7 +18,7 @@ const ManageDoctors = () => {
     return <Loading />;
   }
   const { data: doctors } = data;
-  console.log(doctors);
+
   return (
     <div>
       <h2 className="text-2xl">Manage Doctors {doctors.length}</h2>
@@ -30,6 +30,7 @@ const ManageDoctors = () => {
               <th>#</th>
               <th>Photo</th>
               <th>Name</th>
+              <th>Email</th>
               <th>Specialty</th>
               <th>Action</th>
             </tr>
