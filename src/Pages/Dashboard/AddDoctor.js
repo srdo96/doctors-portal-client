@@ -38,7 +38,7 @@ const AddDoctor = () => {
             img: img,
           };
           // send to your database
-          fetch("http://localhost:5000/doctor", {
+          fetch("http://localhost:5000/addDoctor", {
             method: "POST",
             headers: {
               "content-type": "application/json",

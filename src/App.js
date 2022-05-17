@@ -15,6 +15,7 @@ import MyReview from "./Pages/Dashboard/MyReview";
 import Users from "./Pages/Dashboard/Users";
 import ReqAdmin from "./Pages/Auth/ReqAdmin";
 import AddDoctor from "./Pages/Dashboard/AddDoctor";
+import ManageDoctors from "./Pages/Dashboard/ManageDoctors";
 
 function App() {
   return (
@@ -36,7 +37,7 @@ function App() {
           }
         />
 
-        {/* dashboard */}
+        {/* Dashboard Route */}
         <Route
           path="dashboard"
           element={
@@ -60,6 +61,14 @@ function App() {
             element={
               <ReqAdmin>
                 <AddDoctor />
+              </ReqAdmin>
+            }
+          />
+          <Route
+            path="manageDoctors"
+            element={
+              <ReqAdmin>
+                <ManageDoctors />
               </ReqAdmin>
             }
           />
