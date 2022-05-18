@@ -1,10 +1,13 @@
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "react-query";
 import Loading from "../Shared/Loading";
+import DeleteConfirmModal from "./DeleteConfirmModal";
 import DoctorRow from "./DoctorRow";
 
 const ManageDoctors = () => {
+  const [removeDoctor, setRemoveDoctor] = useState(null);
+
   const { data, isLoading, refetch } = useQuery("allDoctors", () =>
     // fetch("http://localhost:5000/doctors").then((res) => res.json())
     axios.get("http://localhost:5000/doctors", {
@@ -42,11 +45,19 @@ const ManageDoctors = () => {
                 index={i}
                 doctor={doctor}
                 refetch={refetch}
+                setRemoveDoctor={setRemoveDoctor}
               />
             ))}
           </tbody>
         </table>
       </div>
+      {removeDoctor && (
+        <DeleteConfirmModal
+          removeDoctor={removeDoctor}
+          refetch={refetch}
+          setRemoveDoctor={setRemoveDoctor}
+        />
+      )}
     </div>
   );
 };

@@ -2,23 +2,8 @@ import axios from "axios";
 import React from "react";
 import toast from "react-hot-toast";
 
-const DoctorRow = ({ doctor, index, refetch }) => {
+const DoctorRow = ({ doctor, index, refetch, setRemoveDoctor }) => {
   const { img, name, specialty, email } = doctor;
-
-  const handleDelete = () => {
-    axios
-      .delete(`http://localhost:5000/doctor/${email}`, {
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
-      .then((res) => {
-        if (res.data.deletedCount) {
-          toast.success(`Dr ${name} is remove.`);
-          refetch();
-        }
-      });
-  };
 
   return (
     <tr>
@@ -35,9 +20,13 @@ const DoctorRow = ({ doctor, index, refetch }) => {
       <td>{specialty}</td>
 
       <td>
-        <button onClick={handleDelete} class="btn btn-xs btn-error">
+        <label
+          onClick={() => setRemoveDoctor(doctor)}
+          htmlFor="delete-confirm-modal"
+          className="btn btn-xs btn-error"
+        >
           Remove
-        </button>
+        </label>
       </td>
     </tr>
   );
