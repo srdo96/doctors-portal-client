@@ -7,7 +7,7 @@ const DeleteConfirmModal = ({ removeDoctor, refetch, setRemoveDoctor }) => {
 
   const handleDelete = () => {
     axios
-      .delete(`http://localhost:5000/doctor/${email}`, {
+      .delete(`https://desolate-fjord-46813.herokuapp.com/doctor/${email}`, {
         headers: {
           authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },

@@ -7,10 +7,12 @@ import { useParams } from "react-router-dom";
 import Loading from "../Shared/Loading";
 import CheckoutForm from "./CheckoutForm";
 
-const stripePromise = loadStripe(`${process.env.STRIPE_PUBLISHABLE_KEY}`);
+const stripePromise = loadStripe(
+  "pk_test_51L0kyGHNHwJkKNhdhpiTxfNlOLHZuwJ0oDKzDU9u6CZx08bwgG1s9YoNk7XhUY4Y9oYMgs6TvyQD519rvvD7L26u00veFwBxoP"
+);
 const Payment = () => {
   const { id } = useParams();
-  const url = `http://localhost:5000/booking/${id}`;
+  const url = `https://desolate-fjord-46813.herokuapp.com/booking/${id}`;
 
   const { data, isLoading } = useQuery(["booking", id], () =>
     axios({
@@ -44,7 +46,7 @@ const Payment = () => {
         <div class="card-body">
           {" "}
           <Elements stripe={stripePromise}>
-            <CheckoutForm />
+            <CheckoutForm appointment={appointment} />
           </Elements>
         </div>
       </div>

@@ -9,8 +9,8 @@ const ManageDoctors = () => {
   const [removeDoctor, setRemoveDoctor] = useState(null);
 
   const { data, isLoading, refetch } = useQuery("allDoctors", () =>
-    // fetch("http://localhost:5000/doctors").then((res) => res.json())
-    axios.get("http://localhost:5000/doctors", {
+    // fetch("https://desolate-fjord-46813.herokuapp.com/doctors").then((res) => res.json())
+    axios.get("https://desolate-fjord-46813.herokuapp.com/doctors", {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },

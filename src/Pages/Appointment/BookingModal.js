@@ -24,7 +24,7 @@ const BookingModal = ({ booking, setBooking, selectedDate, refetch }) => {
     };
 
     // fetch("https://desolate-fjord-46813.herokuapp.com/booking",
-    fetch("http://localhost:5000/booking", {
+    fetch("https://desolate-fjord-46813.herokuapp.com/booking", {
       method: "POST",
       headers: {
         "content-type": "application/json",
